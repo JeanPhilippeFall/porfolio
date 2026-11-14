@@ -1,0 +1,11 @@
+---
+import { site, ui } from "../data/cv";
+import Bi from "./Bi.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-100 px-5 py-8 text-center text-xs text-slate-400 dark:border-slate-900 dark:text-slate-500">
+  <p>{site.name} · {year}</p>
+  <p class="mt-1"><Bi text={ui.footer} /></p>
+</footer>

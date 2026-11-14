@@ -1,0 +1,32 @@
+---
+import { about, interests, languages } from "../data/cv";
+import Bi from "./Bi.astro";
+
+const title = { fr: "À propos", en: "About" };
+---
+
+<section id="about" class="px-5 py-20">
+  <div class="reveal mx-auto max-w-3xl">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-accent dark:text-accent-dark">
+      <Bi text={title} />
+    </h2>
+
+    <p class="mt-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+      <Bi text={about} />
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      {languages.map((lang) => (
+        <span class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+          <span class="font-medium text-slate-800 dark:text-slate-100"><Bi text={lang.name} /></span>
+          {" — "}
+          <Bi text={lang.level} />
+        </span>
+      ))}
+    </div>
+
+    <p class="mt-6 text-sm text-slate-400 dark:text-slate-500">
+      <Bi text={interests} />
+    </p>
+  </div>
+</section>

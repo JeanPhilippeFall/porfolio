@@ -1,0 +1,41 @@
+---
+import { education, certifications } from "../data/cv";
+import Bi from "./Bi.astro";
+
+const title = { fr: "Formation & certifications", en: "Education & certifications" };
+---
+
+<section id="education" class="px-5 py-20">
+  <div class="reveal mx-auto max-w-3xl">
+    <h2 class="text-sm font-semibold uppercase tracking-wider text-accent dark:text-accent-dark">
+      <Bi text={title} />
+    </h2>
+
+    <div class="mt-8 space-y-5">
+      {education.map((item) => (
+        <div class="flex flex-col gap-1 border-b border-slate-100 pb-5 last:border-none dark:border-slate-800 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <p class="font-medium text-slate-900 dark:text-white">
+              <Bi text={item.title} />
+            </p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{item.school} · {item.location}</p>
+          </div>
+          <p class="text-xs font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
+            <Bi text={item.period} />
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 space-y-4">
+      {certifications.map((cert) => (
+        <div class="rounded-2xl border border-slate-200 p-4 dark:border-slate-800">
+          <p class="font-medium text-slate-900 dark:text-white">{cert.name} <span class="text-slate-400">· {cert.year}</span></p>
+          <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <Bi text={cert.description} />
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

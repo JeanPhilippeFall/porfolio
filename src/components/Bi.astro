@@ -1,0 +1,15 @@
+---
+import type { Bilingual } from "../data/cv";
+
+interface Props {
+  text: Bilingual;
+  as?: string;
+  class?: string;
+}
+
+const { text, as = "span", class: className } = Astro.props as Props;
+// Dynamic tag: cast to `any` so TS doesn't restrict attrs to IntrinsicAttributes.
+const Tag = as as any;
+---
+
+<Tag data-lang="fr" class={className}>{text.fr}</Tag><Tag data-lang="en" hidden class={className}>{text.en}</Tag>

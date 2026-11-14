@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Build Docker image (smoke test)
+        run: docker build -t portfolio:ci .
+
+      - name: Run container and check it responds
+        run: |
+          docker run -d --rm -p 8099:80 --name portfolio-ci portfolio:ci
+          sleep 2
+          curl -sf http://localhost:8099/ > /dev/null
+          docker stop portfolio-ci
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  # Déploiement sur Cloudflare Pages via Wrangler.
+  # Nécessite les secrets CLOUDFLARE_API_TOKEN et CLOUDFLARE_ACCOUNT_ID
+  # (Settings > Secrets and variables > Actions). Sans ces secrets, ce job
+  # échoue mais le job `build` ci-dessus reste valide.
+  # Alternative plus simple : connecter le repo directement dans le
+  # dashboard Cloudflare Pages (déploiement auto sans CI) — voir README.
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=portfolio-jean-philippe-fall
