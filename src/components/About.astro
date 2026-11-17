@@ -1,11 +1,11 @@
 ---
-import { about, interests, languages } from "../data/cv";
+import { about, aboutLabels, interests, languages } from "../data/cv";
 import Bi from "./Bi.astro";
 
 const title = { fr: "À propos", en: "About" };
 ---
 
-<section id="about" class="px-5 py-20">
+<section id="about" class="px-5 py-10">
   <div class="reveal mx-auto max-w-3xl">
     <h2 class="text-sm font-semibold uppercase tracking-wider text-accent dark:text-accent-dark">
       <Bi text={title} />
@@ -15,18 +15,36 @@ const title = { fr: "À propos", en: "About" };
       <Bi text={about} />
     </p>
 
-    <div class="mt-8 flex flex-wrap gap-3">
-      {languages.map((lang) => (
-        <span class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
-          <span class="font-medium text-slate-800 dark:text-slate-100"><Bi text={lang.name} /></span>
-          {" — "}
-          <Bi text={lang.level} />
-        </span>
-      ))}
+    <div class="mt-8">
+      <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+        <Bi text={aboutLabels.languages} />
+      </h3>
+      <div class="mt-3 flex flex-wrap gap-3">
+        {languages.map((lang) => (
+          <span class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+            <span class="font-medium text-slate-800 dark:text-slate-100">{lang.flag} <Bi text={lang.name} /></span>
+            {" — "}
+            <Bi text={lang.level} />
+          </span>
+        ))}
+      </div>
     </div>
 
-    <p class="mt-6 text-sm text-slate-400 dark:text-slate-500">
-      <Bi text={interests} />
-    </p>
+    <div class="mt-8">
+      <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+        <Bi text={aboutLabels.interests} />
+      </h3>
+      <p class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
+        {interests.map((item, i) => (
+          <>
+            <span class="inline-flex items-center gap-1.5">
+              <span aria-hidden="true">{item.icon}</span>
+              <Bi text={item.label} />
+            </span>
+            {i < interests.length - 1 && <span aria-hidden="true">·</span>}
+          </>
+        ))}
+      </p>
+    </div>
   </div>
 </section>

@@ -23,6 +23,7 @@ export const site = {
   socials: {
     github: "https://github.com/JeanPhilippeFall",
     linkedin: "https://www.linkedin.com/in/jean-philippe-fall-774b65138/",
+    whatsapp: "https://wa.me/221777013162",
   },
 };
 
@@ -33,15 +34,22 @@ export const about: Bilingual = {
     "Software Engineer & Full Stack Developer with a DevOps mindset, 4+ years of combined professional experience (internships included) designing, deploying and operating critical multi-stack platforms. Autonomous across the full project lifecycle — from design to delivery, through development milestones and QA phases — following Agile/Scrum practices. International, versatile profile with a strong interest in staying current with technology.",
 };
 
-export const interests: Bilingual = {
-  fr: "Football · Natation · Documentation & culture générale · Veille technologique",
-  en: "Football · Swimming · Reading & general knowledge · Technology watch",
+export const interests: { icon: string; label: Bilingual }[] = [
+  { icon: "⚽", label: { fr: "Football", en: "Football" } },
+  { icon: "🏊", label: { fr: "Natation", en: "Swimming" } },
+  { icon: "📚", label: { fr: "Documentation & culture générale", en: "Reading & general knowledge" } },
+  { icon: "💻", label: { fr: "Veille technologique", en: "Technology watch" } },
+];
+
+export const aboutLabels = {
+  languages: { fr: "Compétences linguistiques", en: "Language skills" } satisfies Bilingual,
+  interests: { fr: "Centres d'intérêts", en: "Interests" } satisfies Bilingual,
 };
 
 export const languages = [
-  { name: { fr: "Wolof", en: "Wolof" }, level: { fr: "Langue maternelle", en: "Native" } },
-  { name: { fr: "Français", en: "French" }, level: { fr: "C2 — Bilingue", en: "C2 — Bilingual" } },
-  { name: { fr: "Anglais", en: "English" }, level: { fr: "B2 — Courant", en: "B2 — Fluent" } },
+  { flag: "🇸🇳", name: { fr: "Wolof", en: "Wolof" }, level: { fr: "Langue maternelle", en: "Native" } },
+  { flag: "🇫🇷", name: { fr: "Français", en: "French" }, level: { fr: "C2 — Bilingue", en: "C2 — Bilingual" } },
+  { flag: "🇬🇧🇺🇸", name: { fr: "Anglais", en: "English" }, level: { fr: "B2 — Courant", en: "B2 — Fluent" } },
 ];
 
 export interface Experience {
@@ -138,7 +146,7 @@ export const missions: Mission[] = [
   {
     name: "Mirabelle",
     client: { fr: "Soelis, SR51, Services de Remplacement (Nord, Ille-et-Vilaine)", en: "Soelis, SR51, Services de Remplacement (Nord, Ille-et-Vilaine)" },
-    stack: ["Symfony", "Sonata", "MySQL", "Docker"],
+    stack: ["Symfony", "Sonata", "PostgreSQL", "Docker", "Relais Replica"],
     description: {
       fr: "Maintenance évolutive et corrective d'une plateforme SaaS de gestion RH & emploi partagé, en architecture multi-instance (une instance par client).",
       en: "Feature and bug-fix maintenance of a SaaS HR / shared-employment platform, in a multi-instance architecture (one instance per client).",
@@ -147,7 +155,7 @@ export const missions: Mission[] = [
   {
     name: "ADN-BA",
     client: { fr: "SNCF Réseau", en: "SNCF Réseau" },
-    stack: ["Java", "Angular", "PostgreSQL"],
+    stack: ["Java", "Angular", "PostgreSQL", "Docker", "Relais Replica"],
     description: {
       fr: "Conception, développement et déploiement de la plateforme de gestion des bases arrière ; MCO complet.",
       en: "Design, development and deployment of the rear-base management platform; full operational maintenance.",
@@ -156,7 +164,7 @@ export const missions: Mission[] = [
   {
     name: "SNCF-LNC",
     client: { fr: "SNCF Réseau — région Bourgogne-Franche-Comté", en: "SNCF Réseau — Bourgogne-Franche-Comté region" },
-    stack: ["Symfony", "Sonata", "MySQL"],
+    stack: ["Symfony", "Sonata", "PostgreSQL", "Docker", "Relais Replica"],
     description: {
       fr: "Développement et pilotage du MCO de la plateforme de gestion des lignes non circulées.",
       en: "Development and operational maintenance of the decommissioned-lines management platform.",
@@ -165,7 +173,7 @@ export const missions: Mission[] = [
   {
     name: "ATMO-BFC",
     client: { fr: "Surveillance environnementale — Bourgogne-Franche-Comté", en: "Environmental monitoring — Bourgogne-Franche-Comté" },
-    stack: ["Drupal", "API REST", "PHP"],
+    stack: ["Drupal", "PHP", "API REST", "PostgreSQL", "Docker", "Relais Replica"],
     description: {
       fr: "Déploiement et MCO de la plateforme de qualité de l'air : exploitation et export des données de mesure via API internes et externes.",
       en: "Deployment and operations of the air-quality platform: exploiting and exporting measurement data via internal and external APIs.",

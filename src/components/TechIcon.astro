@@ -1,0 +1,50 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// Logos officiels (Simple Icons, CC0) pour les technologies qui ont une marque reconnue.
+// Les autres (Sonata, API REST, Relais Replica...) n'ont pas de logo officiel : badge texte.
+const ICONS: Record<string, { slug: string; invertDark?: boolean }> = {
+  Symfony: { slug: "symfony", invertDark: true },
+  PostgreSQL: { slug: "postgresql" },
+  Docker: { slug: "docker" },
+  Java: { slug: "openjdk", invertDark: true },
+  Angular: { slug: "angular", invertDark: true },
+  Drupal: { slug: "drupal" },
+  PHP: { slug: "php" },
+};
+
+const icon = ICONS[name];
+const svg = icon
+  ? fs.readFileSync(path.resolve("./src/icons/tech", `${icon.slug}.svg`), "utf-8")
+  : null;
+---
+
+{svg ? (
+  <span class="group relative inline-flex">
+    <span
+      aria-label={name}
+      class:list={[
+        "inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 p-1.5 dark:bg-slate-800 [&_svg]:h-full [&_svg]:w-full",
+        { "[&_svg]:dark:invert": icon?.invertDark },
+      ]}
+      set:html={svg}
+    />
+    <span
+      role="tooltip"
+      class="pointer-events-none absolute -top-8 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 dark:bg-slate-100 dark:text-slate-900"
+    >
+      {name}
+    </span>
+  </span>
+) : (
+  <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+    {name}
+  </span>
+)}
