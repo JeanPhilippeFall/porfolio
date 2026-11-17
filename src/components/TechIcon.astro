@@ -1,7 +1,4 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
-
 interface Props {
   name: string;
 }
@@ -20,10 +17,16 @@ const ICONS: Record<string, { slug: string; invertDark?: boolean }> = {
   PHP: { slug: "php" },
 };
 
+// Résolu par Vite à la compilation (fonctionne quel que soit l'adaptateur/runtime de sortie,
+// contrairement à fs.readFileSync qui dépend du cwd au moment du build).
+const svgModules = import.meta.glob("../icons/tech/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
 const icon = ICONS[name];
-const svg = icon
-  ? fs.readFileSync(path.resolve("./src/icons/tech", `${icon.slug}.svg`), "utf-8")
-  : null;
+const svg = icon ? svgModules[`../icons/tech/${icon.slug}.svg`] : null;
 ---
 
 {svg ? (
