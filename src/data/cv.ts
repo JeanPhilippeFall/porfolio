@@ -55,6 +55,7 @@ export const languages = [
 export interface Experience {
   company: string;
   location: string;
+  workMode: Bilingual;
   role: Bilingual;
   period: Bilingual;
   bullets: Bilingual[];
@@ -64,6 +65,7 @@ export const experiences: Experience[] = [
   {
     company: "IAD-Territoire-Digital",
     location: "Besançon, France",
+    workMode: { fr: "Télétravail", en: "Remote" },
     role: { fr: "Ingénieur de Conception & Développeur Full Stack", en: "Software Engineer & Full Stack Developer" },
     period: { fr: "Juillet 2023 — aujourd'hui", en: "July 2023 — present" },
     bullets: [
@@ -88,6 +90,7 @@ export const experiences: Experience[] = [
   {
     company: "ONG Rosa del Desierto",
     location: "Nouadhibou, Mauritanie",
+    workMode: { fr: "Sur site", en: "On-site" },
     role: { fr: "Assistant IT & Gestion de données numériques", en: "IT Assistant & Digital Data Management" },
     period: { fr: "Septembre 2022 — Juillet 2023", en: "September 2022 — July 2023" },
     bullets: [
@@ -108,6 +111,7 @@ export const experiences: Experience[] = [
   {
     company: "Innov4Africa",
     location: "Dakar, Sénégal",
+    workMode: { fr: "Sur site", en: "On-site" },
     role: { fr: "Stagiaire Ingénieur Développeur Full Stack", en: "Full Stack Developer Engineering Intern" },
     period: { fr: "Mars 2021 — Juillet 2021", en: "March 2021 — July 2021" },
     bullets: [
@@ -124,6 +128,7 @@ export const experiences: Experience[] = [
   {
     company: "CRENT-ESP",
     location: "Dakar, Sénégal",
+    workMode: { fr: "Sur site", en: "On-site" },
     role: { fr: "Stagiaire Analyste Programmeur", en: "Programmer Analyst Intern" },
     period: { fr: "Juin 2018 — Août 2018", en: "June 2018 — August 2018" },
     bullets: [

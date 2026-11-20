@@ -22,7 +22,12 @@ const title = { fr: "Expérience", en: "Experience" };
           <h3 class="mt-1 text-lg font-semibold text-slate-900 dark:text-white">
             <Bi text={exp.role} as="span" /> · {exp.company}
           </h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">{exp.location}</p>
+          <p class="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <span>{exp.location}</span>
+            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+              <Bi text={exp.workMode} as="span" />
+            </span>
+          </p>
 
           <ul class="mt-3 space-y-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
             {exp.bullets.map((bullet) => (
